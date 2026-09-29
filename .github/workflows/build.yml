@@ -1,0 +1,14 @@
+name: Build GBA ROM
+on: [push, workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: devkitpro/devkitarm
+    steps:
+      - uses: actions/checkout@v4
+      - run: make
+      - uses: actions/upload-artifact@v4
+        with:
+          name: video-rom
+          path: video.gba
